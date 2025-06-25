@@ -32,17 +32,23 @@ function getRandomColor() {
  * @param {HTMLElement} element - The square element.
  */
 function setColor(element) {
+    // Clear any existing timeout to prevent previous `removeColor` from overriding current hover
+    clearTimeout(element.dataset.timeoutId);
     const color = getRandomColor();
     element.style.backgroundColor = color;
 }
 
 /**
- * Function to reset the background color of a square after mouse leaves.
- * The CSS transition handles the smooth 1-second fade.
+ * Function to reset the background color of a square after a delay.
+ * The smooth transition is still handled by CSS.
  * @param {HTMLElement} element - The square element.
  */
 function removeColor(element) {
-    element.style.backgroundColor = '#222'; // Reset to default square color
+    // Store the timeout ID on the element itself
+    const timeoutId = setTimeout(() => {
+        element.style.backgroundColor = '#222'; // Explicitly set back to default dark color
+    }, 1000); // 1-second delay
+    element.dataset.timeoutId = timeoutId; // Save timeout ID to clear if hovered again quickly
 }
 
 // Dynamically create squares and add them to the container
