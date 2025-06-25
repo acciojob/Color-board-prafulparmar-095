@@ -28,28 +28,21 @@ function getRandomColor() {
 }
 
 /**
- * Function to set the background color of a square.
+ * Function to set the background color of a square on hover.
  * @param {HTMLElement} element - The square element.
  */
 function setColor(element) {
     const color = getRandomColor();
     element.style.backgroundColor = color;
-    element.style.opacity = 1; // Ensure full opacity on hover
 }
 
 /**
- * Function to reset the background color of a square after a delay.
+ * Function to reset the background color of a square after mouse leaves.
+ * The CSS transition handles the smooth 1-second fade.
  * @param {HTMLElement} element - The square element.
  */
 function removeColor(element) {
-    // Add a class to trigger the fade-out transition
-    element.classList.add('fade');
-    setTimeout(() => {
-        // After the transition, reset background to default and remove fade class
-        element.style.backgroundColor = '#222'; // Default square color
-        element.style.opacity = 1; // Reset opacity for next hover
-        element.classList.remove('fade');
-    }, 1000); // Matches the transition duration in CSS
+    element.style.backgroundColor = '#222'; // Reset to default square color
 }
 
 // Dynamically create squares and add them to the container
@@ -71,7 +64,8 @@ window.onload = () => {
     const squareSize = 20; // from CSS
     const gapSize = 1; // from CSS
     const containerWidth = container.clientWidth;
-    const columns = Math.floor(containerWidth / (squareSize + gapSize));
+    // Ensure at least one column to prevent division by zero or invalid grid
+    const columns = Math.max(1, Math.floor(containerWidth / (squareSize + gapSize)));
     container.style.gridTemplateColumns = `repeat(${columns}, ${squareSize}px)`;
 };
 
@@ -80,6 +74,7 @@ window.addEventListener('resize', () => {
     const squareSize = 20;
     const gapSize = 1;
     const containerWidth = container.clientWidth;
-    const columns = Math.floor(containerWidth / (squareSize + gapSize));
+    // Ensure at least one column
+    const columns = Math.max(1, Math.floor(containerWidth / (squareSize + gapSize)));
     container.style.gridTemplateColumns = `repeat(${columns}, ${squareSize}px)`;
 });

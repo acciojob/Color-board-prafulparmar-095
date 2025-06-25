@@ -28,17 +28,7 @@ body {
     width: 20px; /* Fixed size for each square */
     height: 20px;
     background-color: #222; /* Default square color */
-    transition: background-color 0.1s ease-in-out, opacity 1s ease-out; /* Smooth transition for color and fade out */
+    /* Only transition background-color over 1 second smoothly */
+    transition: background-color 1s ease-out;
     border-radius: 2px; /* Slightly rounded corners for squares */
-}
-
-/* Style for when a square is hovered (dynamic color will override this) */
-.square:hover {
-    /* Background color set by JS */
-    /* opacity: 1; is implicit on hover */
-}
-
-/* Initial state for fading out - set by JS */
-.square.fade {
-    opacity: 0;
 }
