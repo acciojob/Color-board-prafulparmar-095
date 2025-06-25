@@ -1,22 +1,44 @@
 body {
-  background: #111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
+    background-color: #1a1a1a; /* Dark background for the board */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Prevent scrollbars if board is larger than viewport */
+    font-family: 'Inter', sans-serif; /* Use Inter font */
 }
 
+/* Container for the squares */
 .container {
-  display: grid;
-  grid-template-columns: repeat(40, 20px); 
-  gap: 2px;
+    display: grid;
+    /* Grid columns will be set by JavaScript to accommodate 800 squares nicely */
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 90vw; /* Responsive width */
+    max-height: 90vh; /* Responsive height */
+    overflow: auto; /* Enable scrolling if board is very large */
+    gap: 1px; /* Small gap between squares */
 }
 
+/* Individual square styling */
 .square {
-  width: 20px;
-  height: 20px;
-  background-color: #1d1d1d;
-  transition: background-color 1s ease;
-  border-radius: 2px;
+    width: 20px; /* Fixed size for each square */
+    height: 20px;
+    background-color: #222; /* Default square color */
+    transition: background-color 0.1s ease-in-out, opacity 1s ease-out; /* Smooth transition for color and fade out */
+    border-radius: 2px; /* Slightly rounded corners for squares */
+}
+
+/* Style for when a square is hovered (dynamic color will override this) */
+.square:hover {
+    /* Background color set by JS */
+    /* opacity: 1; is implicit on hover */
+}
+
+/* Initial state for fading out - set by JS */
+.square.fade {
+    opacity: 0;
 }
